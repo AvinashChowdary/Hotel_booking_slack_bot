@@ -14,3 +14,19 @@ class bot_db(object):
         for obj in self.db.hotels.find():
             response.append(obj)
         return response
+
+    def write_commands(self,keyword):
+        try:
+            itr = self.db.commands.find().next()
+            itr["commands"].append(keyword)
+            self.db.commands.save(itr)
+        except StopIteration:
+            itr = []
+            itr.append(keyword)
+            self.db.commands.insert_one({"commands":itr})
+
+    def read_commands(self):
+        response = []
+        for res in self.db.commands.find():
+            response = res["commands"]
+        return response
