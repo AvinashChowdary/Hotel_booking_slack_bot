@@ -1,6 +1,7 @@
 import os
 import time
 from slackclient import SlackClient
+from processor import processor
 
 # starterbot's ID as an environment variable
 BOT_ID = os.environ.get("BOT_ID")
@@ -22,7 +23,7 @@ def handle_command(command, channel):
     if command.startswith(EXAMPLE_COMMAND):
         response = "Sure...write some more code then I can do that!"
     slack_client.api_call("chat.postMessage", channel=channel,
-                          text=response, as_user=True)
+                          text=processCommand(command), as_user=True)
 
 
 def parse_slack_output(slack_rtm_output):
