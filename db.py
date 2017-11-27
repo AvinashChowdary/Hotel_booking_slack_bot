@@ -3,8 +3,7 @@ from pymongo import MongoClient
 
 class bot_db(object):
     def __init__(self):
-        self.mongodb = MongoClient(os.environ["MONGO_DB_URI"])
-        self.db = self.client.slack_bot_db
+        self.db = self.MongoClient(os.environ["MONGO_DB_URI"]).slack_bot_db
 
     def write(self,data):
         self.db.hotels.insert_one(data)
