@@ -11,6 +11,7 @@ EXAMPLE_COMMAND = "do"
 
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 
+processor = processor()
 
 def handle_command(command, channel):
     """
@@ -42,7 +43,7 @@ def parse_slack_output(slack_rtm_output):
     return None, None
 
 def processCommand(command):
-    return processor().process(command)
+    return processor.process(command)
     
 
 
