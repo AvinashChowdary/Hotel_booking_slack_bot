@@ -5,18 +5,10 @@ class basics(object):
     def __init__(self):
         self.bot = ChatBot(
             'Hotel Booking Bot',
-            logic_adapters=[
-                "chatterbot.logic.MathematicalEvaluation",
-                "chatterbot.logic.TimeLogicAdapter",
-                "chatterbot.logic.BestMatch"
-            ],
-            input_adapter="chatterbot.input.VariableInputTypeAdapter",
-            output_adapter="chatterbot.output.OutputAdapter",
             trainer='chatterbot.trainers.ChatterBotCorpusTrainer'
       )
 
-        # self.bot.train('chatterbot.corpus.english')
-        self.bot.train('chatterbot.corpus.english.greetings')
+        # self.bot.train('chatterbot.corpus.english.greetings')
         self.bot.train('chatterbot.corpus.english.conversations')
         # self.bot.train('chatterbot.corpus.english.ai')
         # self.bot.train('chatterbot.corpus.english.computers')
