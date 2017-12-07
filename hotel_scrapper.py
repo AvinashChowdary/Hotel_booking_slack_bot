@@ -15,8 +15,10 @@ class hotel_scrapper(object):
 			hotelUrls = self.driver.find_elements_by_css_selector('a.hotel_name_link.url')
 			hotelNames = self.driver.find_elements_by_css_selector('span.sr-hotel__name')
 			hotelRatings = self.driver.find_elements_by_css_selector('span.review-score-badge')
- 
-			for hotelurl,hotelname,hotelrating in zip(hotelUrls,hotelNames,hotelRatings):
+			hotelDetails = self.driver.find_elements_by_css_selector('span.distfromdest.jq_tooltip')
+			hotelDescs = self.driver.find_elements_by_css_selector('div.hotel_desc')
+
+			for hotelurl,hotelname,hotelrating,hoteldetail,hoteldesc in zip(hotelUrls,hotelNames,hotelRatings,hotelDetails,hotelDescs):
 				#get hotel name
 				name = hotelname.text
 				# get url
@@ -25,8 +27,10 @@ class hotel_scrapper(object):
 				rating = hotelrating.text
 				hotelsDict[str(k)] = {}
 				hotelsDict[str(k)]['Link'] = url
-				hotelsDict[str(k)]['Name'] = name
+				hotelsDict[str(k)]['Name'] = name.lower()
 				hotelsDict[str(k)]['Rating'] = rating
+				hotelsDict[str(k)]['Location'] = hoteldetail.text
+				hotelsDict[str(k)]['Description'] = hoteldesc.text
 				k = k+1
 
 		return hotelsDict
